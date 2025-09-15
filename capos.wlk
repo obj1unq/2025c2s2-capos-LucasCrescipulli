@@ -1,9 +1,14 @@
 object rolando {
     const mochila = #{}
     var tamañoMochila = 2
+    const historialDeEncuentros = #{}
     method encontrarArtefacto(artefacto){
         if (mochila.size() < tamañoMochila){
-            mochila.add(artefacto)  
+            mochila.add(artefacto)
+            historialDeEncuentros.add(artefacto)
+        }
+        else {
+            historialDeEncuentros.add(artefacto)
         }
     }
     method tamañoMochila(_tamañoMochila){

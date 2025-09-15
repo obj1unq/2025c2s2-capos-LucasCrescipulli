@@ -27,4 +27,15 @@ describe "Capos"{
         assert.equals(#{collarDivino, espadaDelDestino, armaduraDeAceroValyrio}, rolando.posesiones())
         assert.notThat(rolando.posesiones().contains(libroDeHechizos))
     }
+
+    test "1.4: Historial de artefactos encontrados"{
+        rolando.encontrarArtefacto(espadaDelDestino)
+        rolando.encontrarArtefacto(libroDeHechizos)
+        rolando.encontrarArtefacto(collarDivino)
+        rolando.llegarACasa()
+        rolando.encontrarArtefacto(armaduraDeAceroValyrio)
+        rolando.encontrarArtefacto(collarDivino)
+        assert.equals(#{espadaDelDestino, libroDeHechizos, collarDivino,
+                        armaduraDeAceroValyrio, collarDivino}, rolando.posesiones())
+    }
 }
