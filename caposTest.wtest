@@ -1,0 +1,12 @@
+import capos.*
+
+describe "Capos"{
+
+    test "1.1: Rolando con dos artefactos"{
+        rolando.tamañoMochila(2)
+        rolando.encontrarArtefacto(espadaDelDestino)
+        rolando.encontrarArtefacto(libroDeHechizos)
+        rolando.encontrarArtefacto(collarDivino)
+        assert.equals(rolando.mochila(), #{espadaDelDestino, libroDeHechizos})
+    }
+}
