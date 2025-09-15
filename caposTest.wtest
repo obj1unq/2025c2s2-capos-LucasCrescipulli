@@ -35,7 +35,7 @@ describe "Capos"{
         rolando.llegarACasa()
         rolando.encontrarArtefacto(armaduraDeAceroValyrio)
         rolando.encontrarArtefacto(collarDivino)
-        assert.equals(#{espadaDelDestino, libroDeHechizos, collarDivino,
-                        armaduraDeAceroValyrio, collarDivino}, rolando.posesiones())
+        assert.equals([espadaDelDestino, libroDeHechizos, collarDivino,
+                        armaduraDeAceroValyrio, collarDivino], rolando.historialDeEncuentros())
     }
 }

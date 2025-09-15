@@ -1,34 +1,55 @@
+import wollok.vm.*
 object rolando {
     const mochila = #{}
-    var tamañoMochila = 2
-    const historialDeEncuentros = #{}
+    var tamañoMaximoMochila = 2
+    const historialDeEncuentros = []
+    var poderBase = 6
+    var casa = castilloDePiedra
+    method casa(_casa){
+        casa = _casa
+    }
     method encontrarArtefacto(artefacto){
-        if (mochila.size() < tamañoMochila){
+        historialDeEncuentros.add(artefacto)
+        if (mochila.size() < tamañoMaximoMochila){
             mochila.add(artefacto)
-            historialDeEncuentros.add(artefacto)
-        }
-        else {
-            historialDeEncuentros.add(artefacto)
         }
     }
     method tamañoMochila(_tamañoMochila){
-        tamañoMochila = _tamañoMochila
+        tamañoMaximoMochila = _tamañoMochila
     }
     method mochila() = mochila 
     method llegarACasa(){
-        castilloDePiedra.almacenar(mochila)
+        casa.almacenar(mochila)
         mochila.clear()
     }
     method posesiones(){
-        return mochila.union(castilloDePiedra.almacenamiento())
+        return mochila.union(casa.almacenamiento())
     }
     method tieneArtefacto(artefacto){
         return self.posesiones().contains(artefacto)
     }
+    method poderBase(_poderBase) {
+        poderBase = _poderBase
+    }
+    method poderDePelea(){
+        return poderBase + self.poderDeArtefactos()
+    }
+    method poderDeArtefactos(){
+        return mochila.sum({artefacto => artefacto.poderQueAporta()})
+    }
+    method historialDeEncuentros() = historialDeEncuentros
 }
 
 object espadaDelDestino{
-
+    var vecesQueSeUtilizo = 0
+    method utilizar(){
+        vecesQueSeUtilizo += 1
+    }
+    method poderQueAporta(){
+        return if (vecesQueSeUtilizo > 0){
+            
+        }
+    }
 }
 
 object libroDeHechizos{
