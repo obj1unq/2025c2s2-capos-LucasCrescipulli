@@ -10,6 +10,10 @@ object rolando {
         tamañoMochila = _tamañoMochila
     }
     method mochila() = mochila 
+    method llegarACasa(){
+        castilloDePiedra.almacenar(mochila)
+        mochila.clear()
+    }
 }
 
 object espadaDelDestino{
@@ -26,4 +30,12 @@ object collarDivino{
 
 object armaduraDeAceroValyrio{
 
+}
+
+object castilloDePiedra{
+    const almacenamiento = #{}
+    method almacenar(conjuntoDeArtefactos){
+        almacenamiento.addAll(conjuntoDeArtefactos)
+    }
+    method almacenamiento() = almacenamiento 
 }

@@ -9,4 +9,15 @@ describe "Capos"{
         rolando.encontrarArtefacto(collarDivino)
         assert.equals(rolando.mochila(), #{espadaDelDestino, libroDeHechizos})
     }
+
+    test "1.2: Rolando almacena en el Castillo de Piedra"{
+        rolando.encontrarArtefacto(espadaDelDestino)
+        rolando.encontrarArtefacto(libroDeHechizos)
+        rolando.llegarACasa()
+        assert.equals(castilloDePiedra.almacenamiento(), #{espadaDelDestino, libroDeHechizos})
+        rolando.encontrarArtefacto(collarDivino)
+        rolando.llegarACasa()
+        assert.equals(castilloDePiedra.almacenamiento(), #{espadaDelDestino, libroDeHechizos, collarDivino})
+        assert.equals(#{}, rolando.mochila())
+    }
 }
