@@ -1,9 +1,9 @@
 import wollok.vm.*
 object rolando {
-    const mochila = #{}
+    const property mochila = #{}
     var tamañoMaximoMochila = 2
     const historialDeEncuentros = []
-    var poderBase = 6
+    var property poderBase = 6
     var casa = castilloDePiedra
     method casa(_casa){
         casa = _casa
@@ -17,7 +17,6 @@ object rolando {
     method tamañoMochila(_tamañoMochila){
         tamañoMaximoMochila = _tamañoMochila
     }
-    method mochila() = mochila 
     method llegarACasa(){
         casa.almacenar(mochila)
         mochila.clear()
@@ -28,16 +27,17 @@ object rolando {
     method tieneArtefacto(artefacto){
         return self.posesiones().contains(artefacto)
     }
-    method poderBase(_poderBase) {
-        poderBase = _poderBase
-    }
     method poderDePelea(){
         return poderBase + self.poderDeArtefactos()
     }
     method poderDeArtefactos(){
-        return mochila.sum({artefacto => artefacto.poderQueAporta()})
+        return mochila.sum({artefacto => artefacto.poderQueAportaA(self)})
     }
     method historialDeEncuentros() = historialDeEncuentros
+    method pelearBatalla(){
+        mochila.forEach({artefacto => artefacto.utilizar()})
+        poderBase += 1
+    }
 }
 
 object espadaDelDestino{
@@ -45,9 +45,12 @@ object espadaDelDestino{
     method utilizar(){
         vecesQueSeUtilizo += 1
     }
-    method poderQueAporta(){
-        return if (vecesQueSeUtilizo > 0){
-            
+    method poderQueAportaA(personaje){
+        return if (vecesQueSeUtilizo == 0){
+            personaje.poderBase() 
+        } 
+        else {
+            personaje.poderBase() * 0.5
         }
     }
 }
@@ -57,11 +60,28 @@ object libroDeHechizos{
 }
 
 object collarDivino{
-
+    var vecesQueSeUtilizo = 0
+    method utilizar(){
+        vecesQueSeUtilizo += 1
+    }
+    method poderQueAportaA(personaje){
+        return if (personaje.poderBase() > 6){
+            3 + vecesQueSeUtilizo
+        }
+        else {
+            3
+        }
+    }
 }
 
 object armaduraDeAceroValyrio{
-
+    var vecesQueSeUtilizo = 0
+    method utilizar(){
+        vecesQueSeUtilizo += 1
+    }
+    method poderQueAportaA(personaje){
+        return 6
+    }
 }
 
 object castilloDePiedra{

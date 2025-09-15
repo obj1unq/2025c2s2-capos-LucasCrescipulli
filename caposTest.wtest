@@ -38,4 +38,32 @@ describe "Capos"{
         assert.equals([espadaDelDestino, libroDeHechizos, collarDivino,
                         armaduraDeAceroValyrio, collarDivino], rolando.historialDeEncuentros())
     }
+
+    test "2.1: Comportamiento de los artefactos"{
+        rolando.poderBase(5)
+        rolando.tamañoMochila(3)
+        rolando.mochila().addAll(#{espadaDelDestino, armaduraDeAceroValyrio, collarDivino})
+        rolando.pelearBatalla()
+        assert.equals(6, rolando.poderBase())
+        assert.equals(3, espadaDelDestino.poderQueAportaA(rolando))
+        assert.equals(6, armaduraDeAceroValyrio.poderQueAportaA(rolando))
+        assert.equals(3, collarDivino.poderQueAportaA(rolando))
+        rolando.pelearBatalla()
+        assert.equals(7, rolando.poderBase())
+        assert.equals(3.5, espadaDelDestino.poderQueAportaA(rolando))
+        assert.equals(6, armaduraDeAceroValyrio.poderQueAportaA(rolando))
+        assert.equals(5, collarDivino.poderQueAportaA(rolando))
+        rolando.pelearBatalla()
+        assert.equals(8, rolando.poderBase())
+        assert.equals(4, espadaDelDestino.poderQueAportaA(rolando))
+        assert.equals(6, armaduraDeAceroValyrio.poderQueAportaA(rolando))
+        assert.equals(6, collarDivino.poderQueAportaA(rolando))
+    }
+
+    test "Ejemplo de poder de pelea"{
+        rolando.poderBase(5)
+        rolando.tamañoMochila(3)
+        rolando.mochila().addAll(#{espadaDelDestino, armaduraDeAceroValyrio, collarDivino})
+        assert.equals(19, rolando.poderDePelea())
+    }
 }
