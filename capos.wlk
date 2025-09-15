@@ -56,7 +56,19 @@ object espadaDelDestino{
 }
 
 object libroDeHechizos{
+    var vecesQueSeUtilizo = 0
+    /* qué se hace con esto?
+    var listaDeHechizos = [bendicion, invisibilidad, invocacion]
+    */
 
+    method utilizar(){
+        vecesQueSeUtilizo += 1
+    }
+    method poderQueAportaA(personaje){
+
+    }  
+    
+    // esto tiene sentido??? method bendicion{}
 }
 
 object collarDivino{
