@@ -20,4 +20,11 @@ describe "Capos"{
         assert.equals(castilloDePiedra.almacenamiento(), #{espadaDelDestino, libroDeHechizos, collarDivino})
         assert.equals(#{}, rolando.mochila())
     }
+
+    test "1.3: Saber qué artefactos tiene Rolando"{
+        castilloDePiedra.almacenar(#{collarDivino, espadaDelDestino})
+        rolando.encontrarArtefacto(armaduraDeAceroValyrio)
+        assert.equals(#{collarDivino, espadaDelDestino, armaduraDeAceroValyrio}, rolando.posesiones())
+        assert.notThat(rolando.posesiones().contains(libroDeHechizos))
+    }
 }

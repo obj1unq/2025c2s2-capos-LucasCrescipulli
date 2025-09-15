@@ -14,6 +14,12 @@ object rolando {
         castilloDePiedra.almacenar(mochila)
         mochila.clear()
     }
+    method posesiones(){
+        return mochila.union(castilloDePiedra.almacenamiento())
+    }
+    method tieneArtefacto(artefacto){
+        return self.posesiones().contains(artefacto)
+    }
 }
 
 object espadaDelDestino{
