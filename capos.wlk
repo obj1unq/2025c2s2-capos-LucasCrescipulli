@@ -36,15 +36,22 @@ object rolando {
         mochila.forEach({artefacto => artefacto.utilizar()})
         poderBase += 1
     }
-    method puedeVencerA(personaje){
-        return self.poderDePelea() > personaje.poderBase()
+    method puedeVencerA(enemigo){
+        return self.poderDePelea() > enemigo.poderBase()
     }
-    method puedeConquistarLaMoradaDe(personaje){
-        return self.puedeVencerA(personaje)
+    method puedeConquistarLaMoradaDe(enemigo){
+        return self.puedeVencerA(enemigo)
     }
     method esPoderoso(){
-        const enemigosDerrotables = erethia.personajes().filter({personaje => self.puedeVencerA(personaje)})
+        const enemigosDerrotables = erethia.personajes().filter({enemigo => self.puedeVencerA(enemigo)})
         return enemigosDerrotables == erethia.personajes()
+    }
+    method tieneArtefactoFatalPara(enemigo){
+        // Hay en la mochila algún artefacto con el cual su poder de pelea sea mayor al de su enemigo
+        return mochila.find({artefacto => self.esFatalPara(enemigo, artefacto)})
+    }
+    method esFatalPara(enemigo, artefacto){
+        return self.poderBase() + artefacto.poderQueAportaA(self) > enemigo.poderBase()
     }
 }
 

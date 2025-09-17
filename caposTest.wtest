@@ -94,4 +94,11 @@ describe "Capos"{
         rolando.poderBase(10)
         assert.that(rolando.esPoderoso())
     }
+
+    test "2.5: Artefacto fatal"{
+        rolando.poderBase(15)
+        rolando.encontrarArtefacto(espadaDelDestino)
+        rolando.encontrarArtefacto(collarDivino)
+        assert.that(rolando.tieneArtefactoFatalPara(astra))
+    }
 }
