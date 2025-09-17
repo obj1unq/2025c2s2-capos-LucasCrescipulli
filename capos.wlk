@@ -56,19 +56,37 @@ object espadaDelDestino{
 }
 
 object libroDeHechizos{
-    var vecesQueSeUtilizo = 0
-    /* qué se hace con esto?
-    var listaDeHechizos = [bendicion, invisibilidad, invocacion]
-    */
-
-    method utilizar(){
-        vecesQueSeUtilizo += 1
-    }
+    var listaDeHechizos = []
     method poderQueAportaA(personaje){
+        return if (not listaDeHechizos.isEmpty()){
+            listaDeHechizos.first().poderQueAportaA(personaje)
+            listaDeHechizos.remove(listaDeHechizos.first())
+        }
+        else {
+            0
+        }
+    }
+    method listaDeHechizos(_listaDeHechizos){
+        listaDeHechizos = _listaDeHechizos
+    }
+}
+object bendicion{
+    method poderQueAportaA(personaje){
+        return 4
+    }
+}
 
-    }  
-    
-    // esto tiene sentido??? method bendicion{}
+object invisibilidad{
+    method poderQueAportaA(personaje){
+        return personaje.poderBase()
+    }
+}
+
+object invocacion{
+    method poderQueAportaA(personaje){
+        const artefactos = personaje.casa().almacenamiento()
+        return artefactos.max({artefacto => artefacto.poderQueAportaA(personaje)})
+    }
 }
 
 object collarDivino{
