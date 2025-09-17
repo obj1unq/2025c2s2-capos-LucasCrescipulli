@@ -35,6 +35,12 @@ object rolando {
         mochila.forEach({artefacto => artefacto.utilizar()})
         poderBase += 1
     }
+    method puedeVencerA(personaje){
+        return self.poderDePelea() > personaje.poderBase()
+    }
+    method puedeConquistarLaMoradaDe(personaje){
+        return self.puedeVencerA(personaje)
+    }
 }
 
 object espadaDelDestino{
@@ -124,4 +130,31 @@ object castilloDePiedra{
     method artefactoMasPoderosoPara(personaje){
         return almacenamiento.max({artefacto => artefacto.poderQueAportaA(personaje)})
     }
+}
+
+object caterina{
+    var property poderBase = 28
+    var property casa = fortalezaDeAcero
+}
+
+object archibaldo{
+    var property poderBase = 16
+    var property casa = palacioDeMarmol
+}
+
+object astra{
+    var property poderBase = 14
+    var property casa = torreDeMarfil
+}
+
+object fortalezaDeAcero{
+
+}
+
+object palacioDeMarmol{
+
+}
+
+object torreDeMarfil{
+
 }
