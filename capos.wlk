@@ -4,10 +4,7 @@ object rolando {
     var tamañoMaximoMochila = 2
     const historialDeEncuentros = []
     var property poderBase = 6
-    var casa = castilloDePiedra
-    method casa(_casa){
-        casa = _casa
-    }
+    var property casa = castilloDePiedra
     method encontrarArtefacto(artefacto){
         historialDeEncuentros.add(artefacto)
         if (mochila.size() < tamañoMaximoMochila){
@@ -57,13 +54,18 @@ object espadaDelDestino{
 
 object libroDeHechizos{
     var listaDeHechizos = []
-    method poderQueAportaA(personaje){
-        return if (not listaDeHechizos.isEmpty()){
-            listaDeHechizos.first().poderQueAportaA(personaje)
+    
+    method utilizar(){
+        if (not listaDeHechizos.isEmpty()){
             listaDeHechizos.remove(listaDeHechizos.first())
         }
+    }
+    method poderQueAportaA(personaje){
+        if (listaDeHechizos.isEmpty()){
+            return 0
+        }
         else {
-            0
+            return listaDeHechizos.first().poderQueAportaA(personaje)
         }
     }
     method listaDeHechizos(_listaDeHechizos){
@@ -84,8 +86,7 @@ object invisibilidad{
 
 object invocacion{
     method poderQueAportaA(personaje){
-        const artefactos = personaje.casa().almacenamiento()
-        return artefactos.max({artefacto => artefacto.poderQueAportaA(personaje)})
+        return personaje.casa().artefactoMasPoderosoPara(personaje).poderQueAportaA(personaje)
     }
 }
 
@@ -120,4 +121,7 @@ object castilloDePiedra{
         almacenamiento.addAll(conjuntoDeArtefactos)
     }
     method almacenamiento() = almacenamiento 
+    method artefactoMasPoderosoPara(personaje){
+        return almacenamiento.max({artefacto => artefacto.poderQueAportaA(personaje)})
+    }
 }

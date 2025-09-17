@@ -66,4 +66,18 @@ describe "Capos"{
         rolando.mochila().addAll(#{espadaDelDestino, armaduraDeAceroValyrio, collarDivino})
         assert.equals(19, rolando.poderDePelea())
     }
+
+    test "2.2: Libro de hechizos"{
+        rolando.poderBase(5)
+        rolando.encontrarArtefacto(libroDeHechizos)
+        libroDeHechizos.listaDeHechizos([bendicion, invisibilidad, invocacion])
+        castilloDePiedra.almacenar(#{espadaDelDestino, armaduraDeAceroValyrio, collarDivino})
+        assert.equals(4, libroDeHechizos.poderQueAportaA(rolando))
+        rolando.pelearBatalla()
+        assert.equals(6, libroDeHechizos.poderQueAportaA(rolando))
+        rolando.pelearBatalla()
+        assert.equals(7, libroDeHechizos.poderQueAportaA(rolando))
+        rolando.pelearBatalla()
+        assert.equals(0, libroDeHechizos.poderQueAportaA(rolando))
+    }
 }
