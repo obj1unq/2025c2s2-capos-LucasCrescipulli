@@ -89,6 +89,9 @@ describe "Capos"{
         assert.that(rolando.puedeVencerA(archibaldo))
         assert.that(rolando.puedeVencerA(astra))
         assert.that(rolando.puedeConquistarLaMoradaDe(archibaldo))
-        assert.that(rolando.puedeConquistarLaMoradaDe(astra))   
+        assert.that(rolando.puedeConquistarLaMoradaDe(astra))
+        assert.notThat(rolando.esPoderoso())
+        rolando.poderBase(10)
+        assert.that(rolando.esPoderoso())
     }
 }

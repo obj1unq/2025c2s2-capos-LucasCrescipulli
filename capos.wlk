@@ -5,6 +5,7 @@ object rolando {
     const historialDeEncuentros = []
     var property poderBase = 6
     var property casa = castilloDePiedra
+
     method encontrarArtefacto(artefacto){
         historialDeEncuentros.add(artefacto)
         if (mochila.size() < tamañoMaximoMochila){
@@ -40,6 +41,10 @@ object rolando {
     }
     method puedeConquistarLaMoradaDe(personaje){
         return self.puedeVencerA(personaje)
+    }
+    method esPoderoso(){
+        const enemigosDerrotables = erethia.personajes().filter({personaje => self.puedeVencerA(personaje)})
+        return enemigosDerrotables == erethia.personajes()
     }
 }
 
@@ -157,4 +162,8 @@ object palacioDeMarmol{
 
 object torreDeMarfil{
 
+}
+
+object erethia{
+    const property personajes = #{caterina, archibaldo, astra, rolando}
 }
